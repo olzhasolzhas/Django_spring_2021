@@ -1,0 +1,37 @@
+{% extends '../../../base.html' %}
+
+{% block title%}
+{{ title }}
+{% endblock %}
+
+{% block content%}
+
+    <div style="padding-left: 15%; padding-right:15%">
+        <button class="btn-success" style="margin-bottom: 20px"> Add Task </button>
+        <h1>Completed tasks in List1 </h1>
+        <table style=" width:100%">
+            <tr >
+                <th style="padding: 15px">Task</th>
+                <th>Created</th>
+                <th>Due on</th>
+                <th>Owner</th>
+                <th>Mark</th>
+            </tr>
+            {% for user in users %}
+                {% if user.mark == True %}
+                <tr style="border-top: 1px solid gray">
+                    <th style="padding: 15px">Task{{ user.id }}</th>
+                    <th>{{ user.created }}</th>
+                    <th>{{ user.due_on }}</th>
+                    <th>{{ user.owner }}</th>
+                    <th><button class="btn-info">Not Done</button></th>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <a href="{% url 'todo_list' %}"><button class="btn-warning">View incomplete tasks</button></a>
+        <button class="btn-danger">Delete this list</button>
+    </div>
+
+{% endblock %}
